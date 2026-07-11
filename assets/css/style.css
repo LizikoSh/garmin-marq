@@ -95,7 +95,7 @@ button { color: inherit; }
 .hero__media {
   position: absolute;
   inset: 0;
-  background: url("../images/marq-collection-hero.jpg") center 45% / cover no-repeat;
+  background: url("../images/marq-collection-hero.webp") center 45% / cover no-repeat;
   transform: scale(1.04);
   animation: heroDrift 16s ease-out both;
 }
@@ -140,7 +140,6 @@ button { color: inherit; }
 .filter-chip.is-active, .filter-chip:hover { background: #f4f1eb; border-color: #f4f1eb; color: #111; }
 .model-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
 .model-card { position: relative; grid-column: span 4; min-height: 590px; overflow: hidden; background: #0c0c0c; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .35s, border-color .35s; }
-.model-card:nth-child(1), .model-card:nth-child(6) { grid-column: span 8; }
 .model-card:hover { transform: translateY(-5px); border-color: rgba(185,161,120,.55); }
 .model-card__media { position: absolute; inset: 0; overflow: hidden; }
 .model-card__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,.1) 65%); }
@@ -156,7 +155,7 @@ button { color: inherit; }
 .model-card.is-hidden { display: none; }
 
 .cinematic-break { position: relative; min-height: min(820px, 92vh); display: flex; align-items: flex-end; overflow: hidden; }
-.cinematic-break__image { position: absolute; inset: 0; background: url("../images/marq-carbon-lifestyle.jpg") 60% center / cover no-repeat; }
+.cinematic-break__image { position: absolute; inset: 0; background: url("../images/marq-carbon-lifestyle.webp") 60% center / cover no-repeat; }
 .cinematic-break__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.12)), linear-gradient(0deg, rgba(0,0,0,.8), transparent 70%); }
 .cinematic-break__content { position: relative; z-index: 2; padding-bottom: clamp(70px, 10vw, 130px); }
 .cinematic-break__content p:last-child { max-width: 530px; color: #d1cec6; }
@@ -211,7 +210,7 @@ tbody th { width: 25%; font-family: var(--serif); font-size: 28px; font-weight: 
 tbody td { color: #b4b1a9; font-size: 13px; }
 
 .contact { position: relative; min-height: 780px; display: flex; align-items: center; text-align: center; overflow: hidden; }
-.contact__bg { position: absolute; inset: 0; background: url("../images/marq-collection-hero.jpg") center / cover no-repeat; filter: saturate(.45); transform: scale(1.08); }
+.contact__bg { position: absolute; inset: 0; background: url("../images/marq-collection-hero.webp") center / cover no-repeat; filter: saturate(.45); transform: scale(1.08); }
 .contact::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.72); backdrop-filter: blur(3px); }
 .contact__content { position: relative; z-index: 2; }
 .contact__content .display-title { font-size: clamp(52px, 8vw, 118px); }
@@ -244,7 +243,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.98); } }
 
 @media (max-width: 1024px) {
-  .model-card, .model-card:nth-child(1), .model-card:nth-child(6) { grid-column: span 6; }
+  .model-card { grid-column: span 6; }
   .material-panel__content { padding-right: 50%; }
   .technology__layout { grid-template-columns: 1fr; }
   .technology__sticky { position: static; }
@@ -279,8 +278,8 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .fact-strip { grid-template-columns: 1fr 1fr; }
   .fact-strip div { padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,.12); }
 
-  .model-grid { display: block; }
-  .model-card { min-height: 530px; margin-bottom: 14px; }
+  .model-grid { grid-template-columns: 1fr; gap: 14px; }
+  .model-card { grid-column: span 1; min-height: 530px; }
   .model-card[data-wide="false"] .model-card__media img { padding: 38px 15px 155px; }
 
   .cinematic-break { min-height: 700px; }
