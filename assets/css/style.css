@@ -210,7 +210,13 @@ tbody th { width: 25%; font-family: var(--serif); font-size: 28px; font-weight: 
 tbody td { color: #b4b1a9; font-size: 13px; }
 
 .contact { position: relative; min-height: 780px; display: flex; align-items: center; text-align: center; overflow: hidden; }
-.contact__bg { position: absolute; inset: 0; background: url("../images/marq-collection-hero.webp") center / cover no-repeat; filter: saturate(.45); transform: scale(1.08); }
+.contact__bg {
+  position: absolute;
+  inset: 0;
+  background: url("../images/9-find-the-model.webp") center / cover no-repeat;
+  filter: saturate(.45);
+  transform: scale(1.08);
+}
 .contact::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.72); backdrop-filter: blur(3px); }
 .contact__content { position: relative; z-index: 2; }
 .contact__content .display-title { font-size: clamp(52px, 8vw, 118px); }
