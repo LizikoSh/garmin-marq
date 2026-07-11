@@ -5,7 +5,7 @@ const models = [
     material: "titanium",
     badge: "Sport",
     tagline: "Створений для тих, хто перетворює тренування на результат.",
-    image: "assets/images/marq-athlete-thumb.jpg",
+    image: "assets/images/marq-athlete-thumb.webp",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     wide: false
   },
@@ -15,7 +15,7 @@ const models = [
     material: "titanium",
     badge: "Outdoor",
     tagline: "Класична естетика інструментального годинника для нових маршрутів.",
-    image: "assets/images/marq-adventurer-thumb.jpg",
+    image: "assets/images/marq-adventurer-thumb.webp",
     features: ["TopoActive maps", "NextFork™", "Компасний безель 360°", "Гібридний ремінець зі шкіри та FKM"],
     wide: false
   },
@@ -25,7 +25,7 @@ const models = [
     material: "titanium",
     badge: "Golf",
     tagline: "Преміальна точність для гри, у якій важливий кожен метр.",
-    image: "assets/images/marq-golfer-thumb.jpg",
+    image: "assets/images/marq-golfer-thumb.webp",
     features: ["Понад 42 000 полів", "Virtual Caddie", "Green Contours", "Три датчики Approach CT10 у комплекті"],
     wide: false
   },
@@ -35,7 +35,7 @@ const models = [
     material: "titanium",
     badge: "Marine",
     tagline: "Штурман, таймер і командний центр — безпосередньо на зап’ясті.",
-    image: "assets/images/marq-captain-thumb.jpg",
+    image: "assets/images/marq-captain-thumb.webp",
     features: ["Regatta Timer", "Керування автопілотом", "Marine data streaming", "Смугастий французький жакардовий ремінець"],
     wide: false
   },
@@ -45,7 +45,7 @@ const models = [
     material: "titanium",
     badge: "Aviation",
     tagline: "Авіаційні дані, глобальний час і високе годинникове ремесло.",
-    image: "assets/images/marq-aviator-thumb.jpg",
+    image: "assets/images/marq-aviator-thumb.webp",
     features: ["Direct-To navigation", "NEXRAD, METAR і TAF", "24-годинний GMT-безель", "Титановий браслет swept-wing"],
     wide: false
   },
@@ -55,7 +55,7 @@ const models = [
     material: "carbon",
     badge: "Carbon",
     tagline: "Максимальна спортивна функціональність у найлегшому корпусі MARQ.",
-    image: "assets/images/marq-carbon-athlete.png",
+    image: "assets/images/marq-carbon-athlete.webp",
     features: ["130 шарів Fused Carbon Fiber™", "До 16 днів автономності", "Розширені метрики продуктивності", "Купольне сапфірове скло"],
     wide: true
   },
@@ -65,7 +65,7 @@ const models = [
     material: "carbon",
     badge: "Carbon",
     tagline: "Технології для гольфу в корпусі з виразною карбоновою архітектурою.",
-    image: "assets/images/marq-carbon-golfer.png",
+    image: "assets/images/marq-carbon-golfer.webp",
     features: ["Fused Carbon Fiber™", "Virtual Caddie", "Enhanced PlaysLike Distance", "Перфорований гібридний FKM-ремінець"],
     wide: false
   },
@@ -75,7 +75,7 @@ const models = [
     material: "carbon",
     badge: "Tactical",
     tagline: "Преміальний тактичний інструмент із непомітним профілем.",
-    image: "assets/images/marq-carbon-commander.png",
+    image: "assets/images/marq-carbon-commander.webp",
     features: ["Stealth Mode", "Kill Switch", "Dual-position format", "Жакардовий тактичний нейлоновий ремінець"],
     wide: false
   },
@@ -85,11 +85,11 @@ const models = [
     material: "steel",
     badge: "Limited craft",
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
-    image: "assets/images/marq-adventurer-damascus.png",
-    fallback: "assets/images/marq-collection-hero.jpg",
+    image: "assets/images/marq-adventurer-damascus.webp",
+    fallback: "assets/images/marq-collection-hero.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
     wide: false,
-    texture: false
+    texture: true
   }
 ];
 
@@ -154,7 +154,7 @@ function openModal(index) {
     modalImage.alt = model.name;
     modalImage.onerror = () => {
       modalImage.onerror = null;
-      modalImage.src = model.fallback || "assets/images/marq-collection-hero.jpg";
+      modalImage.src = model.fallback || "assets/images/marq-collection-hero.webp";
     };
   }
 
