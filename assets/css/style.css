@@ -138,8 +138,9 @@ button { color: inherit; }
 .filter-bar { display: flex; gap: 10px; margin-bottom: 40px; overflow-x: auto; scrollbar-width: none; }
 .filter-chip { flex: 0 0 auto; padding: 11px 17px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: #c8c5bd; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; cursor: pointer; }
 .filter-chip.is-active, .filter-chip:hover { background: #f4f1eb; border-color: #f4f1eb; color: #111; }
-.model-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.model-card { position: relative; min-width: 0; min-height: 590px; overflow: hidden; background: #0c0c0c; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .35s, border-color .35s; }
+.model-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+.model-card { position: relative; grid-column: span 4; min-height: 590px; overflow: hidden; background: #0c0c0c; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .35s, border-color .35s; }
+.model-card:nth-child(1), .model-card:nth-child(6) { grid-column: span 8; }
 .model-card:hover { transform: translateY(-5px); border-color: rgba(185,161,120,.55); }
 .model-card__media { position: absolute; inset: 0; overflow: hidden; }
 .model-card__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,.1) 65%); }
@@ -243,7 +244,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.98); } }
 
 @media (max-width: 1024px) {
-  .model-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .model-card, .model-card:nth-child(1), .model-card:nth-child(6) { grid-column: span 6; }
   .material-panel__content { padding-right: 50%; }
   .technology__layout { grid-template-columns: 1fr; }
   .technology__sticky { position: static; }
@@ -278,8 +279,8 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .fact-strip { grid-template-columns: 1fr 1fr; }
   .fact-strip div { padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,.12); }
 
-  .model-grid { grid-template-columns: 1fr; gap: 14px; }
-  .model-card { min-height: 530px; }
+  .model-grid { display: block; }
+  .model-card { min-height: 530px; margin-bottom: 14px; }
   .model-card[data-wide="false"] .model-card__media img { padding: 38px 15px 155px; }
 
   .cinematic-break { min-height: 700px; }
