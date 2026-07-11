@@ -5,8 +5,7 @@ const models = [
     material: "titanium",
     badge: "Sport",
     tagline: "Створений для тих, хто перетворює тренування на результат.",
-    image: "https://s34181.pcdn.co/en-US/newsroom/wp-content/uploads/2022/10/Marq2-Athlete_HR_1001.24.jpg",
-    fallback: "assets/images/marq-athlete-thumb.jpg",
+    image: "assets/images/marq-athlete-thumb.jpg",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     wide: false
   },
@@ -16,8 +15,7 @@ const models = [
     material: "titanium",
     badge: "Outdoor",
     tagline: "Класична естетика інструментального годинника для нових маршрутів.",
-    image: "https://s34181.pcdn.co/en-US/newsroom/wp-content/uploads/2022/10/Marq2-Adventurer_HR_1002.12.jpg",
-    fallback: "assets/images/marq-adventurer-thumb.jpg",
+    image: "assets/images/marq-adventurer-thumb.jpg",
     features: ["TopoActive maps", "NextFork™", "Компасний безель 360°", "Гібридний ремінець зі шкіри та FKM"],
     wide: false
   },
@@ -27,8 +25,7 @@ const models = [
     material: "titanium",
     badge: "Golf",
     tagline: "Преміальна точність для гри, у якій важливий кожен метр.",
-    image: "https://s34181.pcdn.co/en-US/newsroom/wp-content/uploads/2022/10/Marq2-Golfer_HR_1002.7.jpg",
-    fallback: "assets/images/marq-golfer-thumb.jpg",
+    image: "assets/images/marq-golfer-thumb.jpg",
     features: ["Понад 42 000 полів", "Virtual Caddie", "Green Contours", "Три датчики Approach CT10 у комплекті"],
     wide: false
   },
@@ -38,8 +35,7 @@ const models = [
     material: "titanium",
     badge: "Marine",
     tagline: "Штурман, таймер і командний центр — безпосередньо на зап’ясті.",
-    image: "https://s34181.pcdn.co/en-US/newsroom/wp-content/uploads/2022/10/Marq2-Captain_HR_1002.4.jpg",
-    fallback: "assets/images/marq-captain-thumb.jpg",
+    image: "assets/images/marq-captain-thumb.jpg",
     features: ["Regatta Timer", "Керування автопілотом", "Marine data streaming", "Смугастий французький жакардовий ремінець"],
     wide: false
   },
@@ -49,8 +45,7 @@ const models = [
     material: "titanium",
     badge: "Aviation",
     tagline: "Авіаційні дані, глобальний час і високе годинникове ремесло.",
-    image: "https://s34181.pcdn.co/en-US/newsroom/wp-content/uploads/2022/10/Marq2-Aviator_HR_1000.7.jpg",
-    fallback: "assets/images/marq-aviator-thumb.jpg",
+    image: "assets/images/marq-aviator-thumb.jpg",
     features: ["Direct-To navigation", "NEXRAD, METAR і TAF", "24-годинний GMT-безель", "Титановий браслет swept-wing"],
     wide: false
   },
@@ -90,11 +85,11 @@ const models = [
     material: "steel",
     badge: "Limited craft",
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
-    image: "https://www.garmin.com/en-GB/p/1765781",
+    image: "assets/images/marq-adventurer-damascus.png",
     fallback: "assets/images/marq-collection-hero.jpg",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
     wide: false,
-    texture: true
+    texture: false
   }
 ];
 
