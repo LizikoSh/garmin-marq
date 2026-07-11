@@ -1,9 +1,9 @@
 const models = [
   {
     name: "MARQ Athlete",
-    edition: "Gen 2 · Titanium",
+    edition: "Gen 2 · Титан",
     material: "titanium",
-    badge: "Sport",
+    badge: "Спорт",
     tagline: "Створений для тих, хто перетворює тренування на результат.",
     image: "assets/images/marq-athlete-thumb.webp",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
@@ -11,9 +11,9 @@ const models = [
   },
   {
     name: "MARQ Adventurer",
-    edition: "Gen 2 · Titanium",
+    edition: "Gen 2 · Титан",
     material: "titanium",
-    badge: "Outdoor",
+    badge: "Активний відпочинок",
     tagline: "Класична естетика інструментального годинника для нових маршрутів.",
     image: "assets/images/marq-adventurer-thumb.webp",
     features: ["TopoActive maps", "NextFork™", "Компасний безель 360°", "Гібридний ремінець зі шкіри та FKM"],
@@ -21,9 +21,9 @@ const models = [
   },
   {
     name: "MARQ Golfer",
-    edition: "Gen 2 · Titanium",
+    edition: "Gen 2 · Титан",
     material: "titanium",
-    badge: "Golf",
+    badge: "Гольф",
     tagline: "Преміальна точність для гри, у якій важливий кожен метр.",
     image: "assets/images/marq-golfer-thumb.webp",
     features: ["Понад 42 000 полів", "Virtual Caddie", "Green Contours", "Три датчики Approach CT10 у комплекті"],
@@ -31,9 +31,9 @@ const models = [
   },
   {
     name: "MARQ Captain",
-    edition: "Gen 2 · Titanium",
+    edition: "Gen 2 · Титан",
     material: "titanium",
-    badge: "Marine",
+    badge: "Море",
     tagline: "Штурман, таймер і командний центр — безпосередньо на зап’ясті.",
     image: "assets/images/marq-captain-thumb.webp",
     features: ["Regatta Timer", "Керування автопілотом", "Marine data streaming", "Смугастий французький жакардовий ремінець"],
@@ -41,9 +41,9 @@ const models = [
   },
   {
     name: "MARQ Aviator",
-    edition: "Gen 2 · Titanium",
+    edition: "Gen 2 · Титан",
     material: "titanium",
-    badge: "Aviation",
+    badge: "Авіація",
     tagline: "Авіаційні дані, глобальний час і високе годинникове ремесло.",
     image: "assets/images/marq-aviator-thumb.webp",
     features: ["Direct-To navigation", "NEXRAD, METAR і TAF", "24-годинний GMT-безель", "Титановий браслет swept-wing"],
@@ -53,7 +53,7 @@ const models = [
     name: "MARQ Athlete Carbon",
     edition: "Carbon Edition",
     material: "carbon",
-    badge: "Carbon",
+    badge: "Карбон",
     tagline: "Максимальна спортивна функціональність у найлегшому корпусі MARQ.",
     image: "assets/images/marq-carbon-athlete.webp",
     features: ["130 шарів Fused Carbon Fiber™", "До 16 днів автономності", "Розширені метрики продуктивності", "Купольне сапфірове скло"],
@@ -63,7 +63,7 @@ const models = [
     name: "MARQ Golfer Carbon",
     edition: "Carbon Edition",
     material: "carbon",
-    badge: "Carbon",
+    badge: "Карбон",
     tagline: "Технології для гольфу в корпусі з виразною карбоновою архітектурою.",
     image: "assets/images/marq-carbon-golfer.webp",
     features: ["Fused Carbon Fiber™", "Virtual Caddie", "Enhanced PlaysLike Distance", "Перфорований гібридний FKM-ремінець"],
@@ -73,7 +73,7 @@ const models = [
     name: "MARQ Commander Carbon",
     edition: "Carbon Edition",
     material: "carbon",
-    badge: "Tactical",
+    badge: "Тактичний",
     tagline: "Преміальний тактичний інструмент із непомітним профілем.",
     image: "assets/images/marq-carbon-commander.webp",
     features: ["Stealth Mode", "Kill Switch", "Dual-position format", "Жакардовий тактичний нейлоновий ремінець"],
@@ -81,9 +81,9 @@ const models = [
   },
   {
     name: "MARQ Adventurer Damascus",
-    edition: "Damascus Steel Edition",
+    edition: "Виконання з дамаської сталі",
     material: "steel",
-    badge: "Limited craft",
+    badge: "Лімітоване виконання",
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
     image: "assets/images/marq-adventurer-damascus.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
@@ -103,7 +103,9 @@ function createCard(model, index) {
   article.setAttribute("role", "button");
   article.setAttribute("aria-label", `Детальніше про ${model.name}`);
 
-  const image = `<div class="model-card__media"><img src="${model.image}" alt="${model.name}" loading="lazy"></div>`;
+  const image = model.texture
+    ? `<div class="model-card__media"><div class="damascus-wave"></div></div>`
+    : `<div class="model-card__media"><img src="${model.image}" alt="${model.name}" loading="lazy" ${model.fallback ? `onerror="this.onerror=null;this.src='${model.fallback}'"` : ""}></div>`;
 
   article.innerHTML = `
     ${image}
@@ -138,12 +140,21 @@ function openModal(index) {
   modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
   modal.querySelector("[data-modal-features]").innerHTML = model.features.map(item => `<li>${item}</li>`).join("");
 
-  modalImage.hidden = false;
-  media.classList.remove("material-panel__visual--texture");
-  media.querySelector(".damascus-wave")?.remove();
-  modalImage.src = model.image;
-  modalImage.alt = model.name;
-  modalImage.onerror = null;
+  if (model.texture) {
+    modalImage.hidden = true;
+    media.classList.add("material-panel__visual--texture");
+    if (!media.querySelector(".damascus-wave")) media.insertAdjacentHTML("afterbegin", '<div class="damascus-wave"></div>');
+  } else {
+    modalImage.hidden = false;
+    media.classList.remove("material-panel__visual--texture");
+    media.querySelector(".damascus-wave")?.remove();
+    modalImage.src = model.image;
+    modalImage.alt = model.name;
+    modalImage.onerror = () => {
+      modalImage.onerror = null;
+      modalImage.src = model.fallback || "assets/images/marq-collection-hero.webp";
+    };
+  }
 
   modal.showModal();
 }
