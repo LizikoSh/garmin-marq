@@ -121,7 +121,9 @@ button { color: inherit; }
 .scroll-cue span { position: absolute; top: 9px; left: 50%; width: 3px; height: 3px; border-radius: 50%; background: white; animation: scroll 1.8s infinite; }
 
 .manifesto { background: var(--paper); color: var(--ink); }
-.manifesto__grid { display: grid; grid-template-columns: 1fr 3fr; gap: 30px; align-items: start; }
+.manifesto__grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; text-align: left; }
+.manifesto__body { max-width: 1040px; }
+.manifesto__copy { max-width: 760px; }
 .manifesto .section-kicker { color: #766647; }
 .manifesto__copy { max-width: 700px; margin: 55px 0 0 auto; color: #514f49; font-size: clamp(17px, 1.35vw, 21px); }
 .fact-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(80px, 10vw, 150px); border-top: 1px solid rgba(0,0,0,.18); }
@@ -138,8 +140,8 @@ button { color: inherit; }
 .filter-bar { display: flex; gap: 10px; margin-bottom: 40px; overflow-x: auto; scrollbar-width: none; }
 .filter-chip { flex: 0 0 auto; padding: 11px 17px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: #c8c5bd; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; cursor: pointer; }
 .filter-chip.is-active, .filter-chip:hover { background: #f4f1eb; border-color: #f4f1eb; color: #111; }
-.model-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-.model-card { position: relative; grid-column: span 4; min-height: 590px; overflow: hidden; background: #0c0c0c; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .35s, border-color .35s; }
+.model-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.model-card { position: relative; grid-column: auto; min-height: 590px; overflow: hidden; background: #0c0c0c; border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .35s, border-color .35s; }
 .model-card:hover { transform: translateY(-5px); border-color: rgba(185,161,120,.55); }
 .model-card__media { position: absolute; inset: 0; overflow: hidden; }
 .model-card__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,.1) 65%); }
@@ -154,11 +156,12 @@ button { color: inherit; }
 .model-card__meta span:last-child { color: var(--gold); }
 .model-card.is-hidden { display: none; }
 
-.cinematic-break { position: relative; min-height: min(820px, 92vh); display: flex; align-items: flex-end; overflow: hidden; }
-.cinematic-break__image { position: absolute; inset: 0; background: url("../images/marq-carbon-lifestyle.webp") 60% center / cover no-repeat; }
-.cinematic-break__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.12)), linear-gradient(0deg, rgba(0,0,0,.8), transparent 70%); }
-.cinematic-break__content { position: relative; z-index: 2; padding-bottom: clamp(70px, 10vw, 130px); }
-.cinematic-break__content p:last-child { max-width: 530px; color: #d1cec6; }
+.cinematic-break { padding: clamp(90px, 11vw, 170px) 0; background: #050505; overflow: hidden; }
+.cinematic-break__layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(45px, 7vw, 110px); align-items: center; }
+.cinematic-break__content { position: relative; z-index: 2; }
+.cinematic-break__content p:last-child { max-width: 530px; margin-top: 30px; color: #d1cec6; }
+.cinematic-break__media { margin: 0; min-height: 560px; overflow: hidden; background: #0b0b0b; }
+.cinematic-break__media img { width: 100%; height: 100%; min-height: 560px; object-fit: cover; object-position: center; }
 
 .materials { padding-bottom: 0; }
 .material-stack { margin-top: 90px; }
@@ -177,6 +180,7 @@ button { color: inherit; }
 .material-panel--damascus { background: #cbc7bd; color: #111; }
 .material-panel--damascus .section-kicker, .material-panel--damascus .material-panel__number { color: #655a48; }
 .material-panel--damascus p:last-child { color: #514d46; }
+.material-panel--damascus .material-panel__visual::after { background: linear-gradient(90deg, #cbc7bd 0%, transparent 35%); }
 .material-panel__visual--texture { inset: 0 0 0 45%; }
 .damascus-wave { position: absolute; inset: -20%; background: repeating-radial-gradient(ellipse at 50% 40%, transparent 0 13px, rgba(20,20,18,.18) 14px, transparent 16px 23px), linear-gradient(120deg, #e6e2da, #8e8a82 45%, #d6d1c7 70%); filter: contrast(1.25); transform: rotate(-12deg) scale(1.2); }
 
@@ -210,7 +214,7 @@ tbody th { width: 25%; font-family: var(--serif); font-size: 28px; font-weight: 
 tbody td { color: #b4b1a9; font-size: 13px; }
 
 .contact { position: relative; min-height: 780px; display: flex; align-items: center; text-align: center; overflow: hidden; }
-.contact__bg { position: absolute; inset: 0; background: url("../images/marq-collection-hero.webp") center / cover no-repeat; filter: saturate(.45); transform: scale(1.08); }
+.contact__bg { position: absolute; inset: 0; background: url("../images/9-find-the-model.webp") center / cover no-repeat; filter: saturate(.45); transform: scale(1.08); }
 .contact::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.72); backdrop-filter: blur(3px); }
 .contact__content { position: relative; z-index: 2; }
 .contact__content .display-title { font-size: clamp(52px, 8vw, 118px); }
@@ -243,7 +247,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.98); } }
 
 @media (max-width: 1024px) {
-  .model-card { grid-column: span 6; }
+  .model-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .material-panel__content { padding-right: 50%; }
   .technology__layout { grid-template-columns: 1fr; }
   .technology__sticky { position: static; }
@@ -278,12 +282,13 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .fact-strip { grid-template-columns: 1fr 1fr; }
   .fact-strip div { padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,.12); }
 
-  .model-grid { grid-template-columns: 1fr; gap: 14px; }
-  .model-card { grid-column: span 1; min-height: 530px; }
+  .model-grid { display: grid; grid-template-columns: 1fr; }
+  .model-card { min-height: 530px; margin-bottom: 14px; }
   .model-card[data-wide="false"] .model-card__media img { padding: 38px 15px 155px; }
 
-  .cinematic-break { min-height: 700px; }
-  .cinematic-break__image { background-position: 64% center; }
+  .cinematic-break { padding: 86px 0; }
+  .cinematic-break__layout { grid-template-columns: 1fr; gap: 38px; }
+  .cinematic-break__media, .cinematic-break__media img { min-height: 390px; }
 
   .material-stack { margin-top: 60px; }
   .material-panel { min-height: 780px; align-items: flex-end; }
