@@ -86,10 +86,8 @@ const models = [
     badge: "Limited craft",
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
     image: "assets/images/marq-adventurer-damascus.webp",
-    fallback: "assets/images/marq-collection-hero.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
-    wide: false,
-    texture: true
+    wide: false
   }
 ];
 
@@ -105,9 +103,7 @@ function createCard(model, index) {
   article.setAttribute("role", "button");
   article.setAttribute("aria-label", `Детальніше про ${model.name}`);
 
-  const image = model.texture
-    ? `<div class="model-card__media"><div class="damascus-wave"></div></div>`
-    : `<div class="model-card__media"><img src="${model.image}" alt="${model.name}" loading="lazy" ${model.fallback ? `onerror="this.onerror=null;this.src='${model.fallback}'"` : ""}></div>`;
+  const image = `<div class="model-card__media"><img src="${model.image}" alt="${model.name}" loading="lazy"></div>`;
 
   article.innerHTML = `
     ${image}
@@ -142,21 +138,12 @@ function openModal(index) {
   modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
   modal.querySelector("[data-modal-features]").innerHTML = model.features.map(item => `<li>${item}</li>`).join("");
 
-  if (model.texture) {
-    modalImage.hidden = true;
-    media.classList.add("material-panel__visual--texture");
-    if (!media.querySelector(".damascus-wave")) media.insertAdjacentHTML("afterbegin", '<div class="damascus-wave"></div>');
-  } else {
-    modalImage.hidden = false;
-    media.classList.remove("material-panel__visual--texture");
-    media.querySelector(".damascus-wave")?.remove();
-    modalImage.src = model.image;
-    modalImage.alt = model.name;
-    modalImage.onerror = () => {
-      modalImage.onerror = null;
-      modalImage.src = model.fallback || "assets/images/marq-collection-hero.webp";
-    };
-  }
+  modalImage.hidden = false;
+  media.classList.remove("material-panel__visual--texture");
+  media.querySelector(".damascus-wave")?.remove();
+  modalImage.src = model.image;
+  modalImage.alt = model.name;
+  modalImage.onerror = null;
 
   modal.showModal();
 }
