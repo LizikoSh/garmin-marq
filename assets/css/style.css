@@ -264,7 +264,12 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
   .hero { min-height: 820px; }
-  .hero__media { background-position: 57% center; }
+  .hero__media {
+  background-image: url("../images/marq-collectiom-hero-mobile.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  }
   .hero__veil { background: linear-gradient(0deg, rgba(0,0,0,.95), rgba(0,0,0,.12) 80%); }
   .hero__content { padding-bottom: 85px; }
   .hero__title { font-size: clamp(74px, 26vw, 116px); line-height: .72; }
