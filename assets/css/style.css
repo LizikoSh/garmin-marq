@@ -450,4 +450,39 @@ tbody td { color: #b4b1a9; font-size: 13px; }
     background-size: cover;
     background-repeat: no-repeat;
   }
+  /* Прибрати великий проміжок після таблиці порівняння — лише ПК */
+@media (min-width: 761px) {
+  .compare.section {
+    padding-bottom: 0;
+  }
+}
+  /* Блок характеристик — лише ПК */
+@media (min-width: 761px) {
+
+  /* Зменшити проміжок між текстом і характеристиками */
+  .manifesto .fact-strip {
+    margin-top: 36px;
+
+    /* Прибрати верхню тонку лінію */
+    border-top: 0;
+  }
+
+  /* Прибрати вертикальні розділювачі */
+  .manifesto .fact-strip > div {
+    min-height: 115px;
+    padding: 18px 20px;
+    border-right: 0;
+  }
+
+  /* Прибрати додану нижню риску, якщо вона є */
+  .manifesto .fact-strip--bottom-line::after {
+    content: none;
+    display: none;
+  }
+
+  /* Зменшити порожнє місце після характеристик */
+  .manifesto.section {
+    padding-bottom: 48px;
+  }
+}
 }
