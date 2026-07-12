@@ -264,7 +264,27 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .display-title { font-size: clamp(45px, 15vw, 72px); line-height: .91; }
   .site-header { height: 72px; padding-inline: 18px; }
   .menu-toggle { display: block; z-index: 102; }
-  .site-nav { position: fixed; inset: 0; z-index: 101; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; padding: 90px 30px; background: #080808; transform: translateX(100%); transition: transform .35s ease; }
+  .site-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  padding: 90px 30px;
+
+  background: rgba(8, 8, 8, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transform: translateX(100%);
+  transition:
+    transform .35s ease,
+    background .35s ease;
+}
   .site-nav.is-open { transform: none; }
   .site-nav a { font-family: var(--serif); font-size: 36px; letter-spacing: 0; text-transform: none; }
   .site-nav__cta { padding: 0; border: 0; color: var(--accent); }
