@@ -424,4 +424,12 @@ tbody td { color: #b4b1a9; font-size: 13px; }
     background-size: cover;
     background-repeat: no-repeat;
   }
+/* Прибрати світлий градієнт поверх фото
+   в блоці «Матеріали виняткової якості» */
+.material-panel__visual::after,
+.material-panel--damascus .material-panel__visual::after {
+  content: none;
+  display: none;
+}
+  
 }
