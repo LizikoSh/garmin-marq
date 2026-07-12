@@ -431,5 +431,23 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   content: none;
   display: none;
 }
+
+
+
+
+
+
+  /* Відступ тексту від лівого краю карток матеріалів — лише ПК */
+@media (min-width: 761px) {
+  .materials .material-panel__content.container {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: none;
+    margin: 0;
+
+    padding-left: clamp(40px, 5vw, 80px);
+    padding-right: clamp(30px, 4vw, 60px);
+  }
+}
   
 }
