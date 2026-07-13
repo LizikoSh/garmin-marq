@@ -4,7 +4,7 @@ const models = [
     edition: "Gen 2 · Титан",
     material: "titanium",
     badge: "Спорт",
-    tagline: "Створений для тих, хто перетворює тренування на результат.",
+    tagline: "Преміальний спортивний годинник для тих, хто прагне краще розуміти свою форму, відновлення та тренувальну готовність. Титановий корпус Grade 5, яскравий AMOLED-дисплей і розширені показники продуктивності поєднують технологічність із вишуканою естетикою.",
     image: "assets/images/marq-athlete-thumb.webp",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     descriptionUrl: "model-descriptions/marq-athlete.html",
