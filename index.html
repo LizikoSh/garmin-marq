@@ -270,16 +270,6 @@
       <h2 id="model-modal-title" data-modal-title></h2>
       <p class="model-modal__tagline" data-modal-tagline></p>
 
-      <div
-        class="model-modal__specifications"
-        id="model-specifications-panel"
-        role="tabpanel"
-        aria-labelledby="model-specifications-tab"
-        data-modal-specifications
-      >
-        <p class="model-modal__info-pending" data-modal-features>Інформація готується</p>
-      </div>
-
       <div class="model-modal__actions" role="tablist" aria-label="Інформація про модель">
         <button
           class="model-modal__tab-button"
@@ -294,12 +284,12 @@
         </button>
 
         <button
-          class="model-modal__tab-button is-active"
+          class="model-modal__tab-button"
           id="model-specifications-tab"
           type="button"
           role="tab"
           aria-controls="model-specifications-panel"
-          aria-selected="true"
+          aria-selected="false"
           data-modal-tab="specifications"
         >
           Характеристики
@@ -316,6 +306,22 @@
       hidden
     >
       <div class="model-modal__expanded-inner" data-modal-description></div>
+    </section>
+
+    <section
+      class="model-modal__expanded-description"
+      id="model-specifications-panel"
+      role="tabpanel"
+      aria-labelledby="model-specifications-tab"
+      aria-live="polite"
+      data-modal-specifications
+      hidden
+    >
+      <div class="model-modal__expanded-inner">
+        <div class="model-modal__pending-shell">
+          <p class="model-modal__info-pending" data-modal-features>Інформація готується</p>
+        </div>
+      </div>
     </section>
   </dialog>
 
