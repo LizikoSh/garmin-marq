@@ -1,4 +1,3 @@
-
 const models = [
   {
     name: "MARQ Athlete",
@@ -10,7 +9,6 @@ const models = [
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     wide: false
   },
-  
   {
     name: "MARQ Adventurer",
     edition: "Gen 2 · Титан",
@@ -89,7 +87,8 @@ const models = [
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
     image: "assets/images/marq-adventurer-damascus.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
-    wide: false
+    wide: false,
+    texture: true
   }
 ];
 
