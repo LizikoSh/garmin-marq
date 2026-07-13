@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js");
+
 const models = [
   {
     name: "MARQ Athlete",
@@ -7,6 +9,7 @@ const models = [
     tagline: "Створений для тих, хто перетворює тренування на результат.",
     image: "assets/images/marq-athlete-thumb.webp",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
+    descriptionUrl: "model-descriptions/marq-athlete.html",
     wide: false
   },
   {
@@ -17,6 +20,7 @@ const models = [
     tagline: "Класична естетика інструментального годинника для нових маршрутів.",
     image: "assets/images/marq-adventurer-thumb.webp",
     features: ["TopoActive maps", "NextFork™", "Компасний безель 360°", "Гібридний ремінець зі шкіри та FKM"],
+    descriptionUrl: "model-descriptions/marq-adventurer.html",
     wide: false
   },
   {
@@ -27,6 +31,7 @@ const models = [
     tagline: "Преміальна точність для гри, у якій важливий кожен метр.",
     image: "assets/images/marq-golfer-thumb.webp",
     features: ["Понад 42 000 полів", "Virtual Caddie", "Green Contours", "Три датчики Approach CT10 у комплекті"],
+    descriptionUrl: "model-descriptions/marq-golfer.html",
     wide: false
   },
   {
@@ -37,6 +42,7 @@ const models = [
     tagline: "Штурман, таймер і командний центр — безпосередньо на зап’ясті.",
     image: "assets/images/marq-captain-thumb.webp",
     features: ["Regatta Timer", "Керування автопілотом", "Marine data streaming", "Смугастий французький жакардовий ремінець"],
+    descriptionUrl: "model-descriptions/marq-captain.html",
     wide: false
   },
   {
@@ -47,6 +53,7 @@ const models = [
     tagline: "Авіаційні дані, глобальний час і високе годинникове ремесло.",
     image: "assets/images/marq-aviator-thumb.webp",
     features: ["Direct-To navigation", "NEXRAD, METAR і TAF", "24-годинний GMT-безель", "Титановий браслет swept-wing"],
+    descriptionUrl: "model-descriptions/marq-aviator.html",
     wide: false
   },
   {
@@ -57,6 +64,7 @@ const models = [
     tagline: "Максимальна спортивна функціональність у найлегшому корпусі MARQ.",
     image: "assets/images/marq-carbon-athlete.webp",
     features: ["130 шарів Fused Carbon Fiber™", "До 16 днів автономності", "Розширені метрики продуктивності", "Купольне сапфірове скло"],
+    descriptionUrl: "model-descriptions/marq-athlete-carbon.html",
     wide: true
   },
   {
@@ -67,6 +75,7 @@ const models = [
     tagline: "Технології для гольфу в корпусі з виразною карбоновою архітектурою.",
     image: "assets/images/marq-carbon-golfer.webp",
     features: ["Fused Carbon Fiber™", "Virtual Caddie", "Enhanced PlaysLike Distance", "Перфорований гібридний FKM-ремінець"],
+    descriptionUrl: "model-descriptions/marq-golfer-carbon.html",
     wide: false
   },
   {
@@ -77,6 +86,7 @@ const models = [
     tagline: "Преміальний тактичний інструмент із непомітним профілем.",
     image: "assets/images/marq-carbon-commander.webp",
     features: ["Stealth Mode", "Kill Switch", "Dual-position format", "Жакардовий тактичний нейлоновий ремінець"],
+    descriptionUrl: "model-descriptions/marq-commander-carbon.html",
     wide: false
   },
   {
@@ -87,12 +97,22 @@ const models = [
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
     image: "assets/images/marq-adventurer-damascus.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
+    descriptionUrl: "model-descriptions/marq-adventurer-damascus.html",
     wide: false
   }
 ];
 
 const grid = document.querySelector("[data-model-grid]");
 const modal = document.querySelector("[data-modal]");
+const modalImage = modal.querySelector("[data-modal-image]");
+const modalMedia = modal.querySelector(".model-modal__media");
+const specificationsPanel = modal.querySelector("[data-modal-specifications]");
+const descriptionPanel = modal.querySelector("#model-description-panel");
+const descriptionContainer = modal.querySelector("[data-modal-description]");
+const descriptionButton = modal.querySelector('[data-modal-tab="description"]');
+const specificationsButton = modal.querySelector('[data-modal-tab="specifications"]');
+const descriptionCache = new Map();
+let currentModel = null;
 
 function createCard(model, index) {
   const article = document.createElement("article");
@@ -130,24 +150,99 @@ function createCard(model, index) {
 
 models.forEach((model, index) => grid.appendChild(createCard(model, index)));
 
+function setModalTab(mode, { scroll = true } = {}) {
+  const showDescription = mode === "description";
+
+  descriptionButton.classList.toggle("is-active", showDescription);
+  specificationsButton.classList.toggle("is-active", !showDescription);
+  descriptionButton.setAttribute("aria-selected", String(showDescription));
+  specificationsButton.setAttribute("aria-selected", String(!showDescription));
+
+  specificationsPanel.hidden = showDescription;
+  descriptionPanel.hidden = !showDescription;
+  modal.classList.toggle("is-description-expanded", showDescription);
+
+  if (showDescription && currentModel) {
+    loadModelDescription(currentModel);
+  }
+
+  if (!scroll) return;
+
+  requestAnimationFrame(() => {
+    const target = showDescription ? descriptionPanel : specificationsPanel;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+async function loadModelDescription(model) {
+  const url = model.descriptionUrl;
+  if (!url) {
+    descriptionContainer.innerHTML = '<p class="model-modal__error">Опис не знайдено.</p>';
+    return;
+  }
+
+  if (descriptionContainer.dataset.loadedUrl === url) return;
+
+  descriptionContainer.setAttribute("aria-busy", "true");
+  descriptionContainer.innerHTML = '<p class="model-modal__loading">Завантаження опису…</p>';
+
+  try {
+    let html = descriptionCache.get(url);
+
+    if (!html) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      html = await response.text();
+      descriptionCache.set(url, html);
+    }
+
+    if (!currentModel || currentModel.descriptionUrl !== url) return;
+
+    descriptionContainer.innerHTML = html;
+    descriptionContainer.dataset.loadedUrl = url;
+  } catch (error) {
+    console.error(`Не вдалося завантажити ${url}:`, error);
+
+    if (!currentModel || currentModel.descriptionUrl !== url) return;
+
+    descriptionContainer.innerHTML = `
+      <p class="model-modal__error">
+        Не вдалося завантажити опис. Перевірте, чи файл «${url}» завантажений на сервер.
+      </p>`;
+    delete descriptionContainer.dataset.loadedUrl;
+  } finally {
+    if (currentModel?.descriptionUrl === url) {
+      descriptionContainer.removeAttribute("aria-busy");
+    }
+  }
+}
+
 function openModal(index) {
   const model = models[index];
-  const modalImage = modal.querySelector("[data-modal-image]");
-  const media = modal.querySelector(".model-modal__media");
+  currentModel = model;
 
   modal.querySelector("[data-modal-material]").textContent = model.edition;
   modal.querySelector("[data-modal-title]").textContent = model.name;
   modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
-  modal.querySelector("[data-modal-features]").innerHTML = model.features.map(item => `<li>${item}</li>`).join("");
+  modal.querySelector("[data-modal-features]").innerHTML = model.features
+    .map(item => `<li>${item}</li>`)
+    .join("");
+
+  descriptionContainer.innerHTML = "";
+  delete descriptionContainer.dataset.loadedUrl;
+  descriptionContainer.removeAttribute("aria-busy");
+  setModalTab("specifications", { scroll: false });
 
   if (model.texture) {
     modalImage.hidden = true;
-    media.classList.add("material-panel__visual--texture");
-    if (!media.querySelector(".damascus-wave")) media.insertAdjacentHTML("afterbegin", '<div class="damascus-wave"></div>');
+    modalMedia.classList.add("material-panel__visual--texture");
+    if (!modalMedia.querySelector(".damascus-wave")) {
+      modalMedia.insertAdjacentHTML("afterbegin", '<div class="damascus-wave"></div>');
+    }
   } else {
     modalImage.hidden = false;
-    media.classList.remove("material-panel__visual--texture");
-    media.querySelector(".damascus-wave")?.remove();
+    modalMedia.classList.remove("material-panel__visual--texture");
+    modalMedia.querySelector(".damascus-wave")?.remove();
     modalImage.src = model.image;
     modalImage.alt = model.name;
     modalImage.onerror = () => {
@@ -159,13 +254,31 @@ function openModal(index) {
   modal.showModal();
 }
 
-modal.querySelector("[data-modal-close]").addEventListener("click", () => modal.close());
+function closeModal() {
+  modal.close();
+}
+
+function clearLoadedDescription() {
+  descriptionContainer.querySelectorAll("iframe").forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  descriptionContainer.innerHTML = "";
+  delete descriptionContainer.dataset.loadedUrl;
+  descriptionContainer.removeAttribute("aria-busy");
+  modal.classList.remove("is-description-expanded");
+  currentModel = null;
+}
+
+modal.querySelector("[data-modal-close]").addEventListener("click", closeModal);
 modal.addEventListener("click", event => {
   const rect = modal.getBoundingClientRect();
   const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
-  if (outside) modal.close();
+  if (outside) closeModal();
 });
-modal.querySelector("[data-modal-link]").addEventListener("click", () => modal.close());
+modal.addEventListener("close", clearLoadedDescription);
+
+descriptionButton.addEventListener("click", () => setModalTab("description"));
+specificationsButton.addEventListener("click", () => setModalTab("specifications"));
 
 const filterButtons = document.querySelectorAll("[data-filter]");
 filterButtons.forEach(button => {
@@ -207,3 +320,4 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12, rootMargin: "0px 0px -45px" });
 
 document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
