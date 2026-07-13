@@ -1,3 +1,45 @@
+document.documentElement.classList.add("js");
+
+let revealObserver = null;
+
+function showRevealElement(element) {
+  element.classList.add("is-visible");
+}
+
+function getRevealObserver() {
+  if (!("IntersectionObserver" in window)) return null;
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          showRevealElement(entry.target);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -45px" });
+  }
+
+  return revealObserver;
+}
+
+function observeRevealElement(element) {
+  if (!element) return;
+
+  const observer = getRevealObserver();
+  if (observer) {
+    observer.observe(element);
+  } else {
+    showRevealElement(element);
+  }
+}
+
+function initReveals(scope = document) {
+  scope.querySelectorAll(".reveal").forEach(observeRevealElement);
+}
+
+initReveals();
+
 const models = [
   {
     name: "MARQ Athlete",
@@ -129,17 +171,33 @@ function createCard(model, index) {
   return article;
 }
 
-models.forEach((model, index) => grid.appendChild(createCard(model, index)));
+if (grid) {
+  models.forEach((model, index) => {
+    const card = createCard(model, index);
+    grid.appendChild(card);
+    observeRevealElement(card);
+  });
+}
 
 function openModal(index) {
+  if (!modal) return;
+
   const model = models[index];
+  if (!model) return;
+
   const modalImage = modal.querySelector("[data-modal-image]");
   const media = modal.querySelector(".model-modal__media");
+  const modalMaterial = modal.querySelector("[data-modal-material]");
+  const modalTitle = modal.querySelector("[data-modal-title]");
+  const modalTagline = modal.querySelector("[data-modal-tagline]");
+  const modalFeatures = modal.querySelector("[data-modal-features]");
 
-  modal.querySelector("[data-modal-material]").textContent = model.edition;
-  modal.querySelector("[data-modal-title]").textContent = model.name;
-  modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
-  modal.querySelector("[data-modal-features]").innerHTML = model.features.map(item => `<li>${item}</li>`).join("");
+  if (!modalImage || !media || !modalMaterial || !modalTitle || !modalTagline || !modalFeatures) return;
+
+  modalMaterial.textContent = model.edition;
+  modalTitle.textContent = model.name;
+  modalTagline.textContent = model.tagline;
+  modalFeatures.innerHTML = model.features.map(item => `<li>${item}</li>`).join("");
 
   if (model.texture) {
     modalImage.hidden = true;
@@ -148,7 +206,8 @@ function openModal(index) {
   } else {
     modalImage.hidden = false;
     media.classList.remove("material-panel__visual--texture");
-    media.querySelector(".damascus-wave")?.remove();
+    const wave = media.querySelector(".damascus-wave");
+    if (wave) wave.remove();
     modalImage.src = model.image;
     modalImage.alt = model.name;
     modalImage.onerror = () => {
@@ -157,16 +216,27 @@ function openModal(index) {
     };
   }
 
-  modal.showModal();
+  if (typeof modal.showModal === "function") {
+    modal.showModal();
+  } else {
+    modal.setAttribute("open", "");
+  }
 }
 
-modal.querySelector("[data-modal-close]").addEventListener("click", () => modal.close());
-modal.addEventListener("click", event => {
-  const rect = modal.getBoundingClientRect();
-  const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
-  if (outside) modal.close();
-});
-modal.querySelector("[data-modal-link]").addEventListener("click", () => modal.close());
+if (modal) {
+  const modalClose = modal.querySelector("[data-modal-close]");
+  const modalLink = modal.querySelector("[data-modal-link]");
+
+  if (modalClose) modalClose.addEventListener("click", () => modal.close());
+
+  modal.addEventListener("click", event => {
+    const rect = modal.getBoundingClientRect();
+    const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+    if (outside) modal.close();
+  });
+
+  if (modalLink) modalLink.addEventListener("click", () => modal.close());
+}
 
 const filterButtons = document.querySelectorAll("[data-filter]");
 filterButtons.forEach(button => {
@@ -184,27 +254,24 @@ const header = document.querySelector("[data-header]");
 const toggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 
-window.addEventListener("scroll", () => header.classList.toggle("is-scrolled", window.scrollY > 30), { passive: true });
-toggle.addEventListener("click", () => {
-  const isOpen = toggle.getAttribute("aria-expanded") === "true";
-  toggle.setAttribute("aria-expanded", String(!isOpen));
-  toggle.setAttribute("aria-label", isOpen ? "Відкрити меню" : "Закрити меню");
-  nav.classList.toggle("is-open", !isOpen);
-  document.body.classList.toggle("is-menu-open", !isOpen);
-});
-nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-  toggle.setAttribute("aria-expanded", "false");
-  nav.classList.remove("is-open");
-  document.body.classList.remove("is-menu-open");
-}));
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 30);
+  }, { passive: true });
+}
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
+if (toggle && nav) {
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Відкрити меню" : "Закрити меню");
+    nav.classList.toggle("is-open", !isOpen);
+    document.body.classList.toggle("is-menu-open", !isOpen);
   });
-}, { threshold: 0.12, rootMargin: "0px 0px -45px" });
 
-document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+    toggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("is-open");
+    document.body.classList.remove("is-menu-open");
+  }));
+}
