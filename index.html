@@ -277,7 +277,7 @@
         aria-labelledby="model-specifications-tab"
         data-modal-specifications
       >
-        <ul data-modal-features></ul>
+        <p class="model-modal__info-pending" data-modal-features>Інформація готується</p>
       </div>
 
       <div class="model-modal__actions" role="tablist" aria-label="Інформація про модель">
@@ -289,7 +289,10 @@
           aria-controls="model-description-panel"
           aria-selected="false"
           data-modal-tab="description"
-        >Опис</button>
+        >
+          Опис
+        </button>
+
         <button
           class="model-modal__tab-button is-active"
           id="model-specifications-tab"
@@ -298,7 +301,9 @@
           aria-controls="model-specifications-panel"
           aria-selected="true"
           data-modal-tab="specifications"
-        >Характеристики</button>
+        >
+          Характеристики
+        </button>
       </div>
     </div>
 
