@@ -181,21 +181,22 @@ models.forEach((model, index) => grid.appendChild(createCard(model, index)));
 
 function setModalTab(mode, { scroll = true } = {}) {
   const showDescription = mode === "description";
+  const showSpecifications = mode === "specifications";
 
   descriptionButton.classList.toggle("is-active", showDescription);
-  specificationsButton.classList.toggle("is-active", !showDescription);
+  specificationsButton.classList.toggle("is-active", showSpecifications);
   descriptionButton.setAttribute("aria-selected", String(showDescription));
-  specificationsButton.setAttribute("aria-selected", String(!showDescription));
+  specificationsButton.setAttribute("aria-selected", String(showSpecifications));
 
-  specificationsPanel.hidden = showDescription;
   descriptionPanel.hidden = !showDescription;
-  modal.classList.toggle("is-description-expanded", showDescription);
+  specificationsPanel.hidden = !showSpecifications;
+  modal.classList.toggle("is-description-expanded", showDescription || showSpecifications);
 
   if (showDescription && currentModel) {
     loadModelDescription(currentModel);
   }
 
-  if (!scroll) return;
+  if (!scroll || (!showDescription && !showSpecifications)) return;
 
   requestAnimationFrame(() => {
     const target = showDescription ? descriptionPanel : specificationsPanel;
@@ -258,7 +259,7 @@ function openModal(index) {
   descriptionContainer.innerHTML = "";
   delete descriptionContainer.dataset.loadedUrl;
   descriptionContainer.removeAttribute("aria-busy");
-  setModalTab("specifications", { scroll: false });
+  setModalTab("none", { scroll: false });
 
   if (model.texture) {
     modalImage.hidden = true;
@@ -293,6 +294,12 @@ function clearLoadedDescription() {
   delete descriptionContainer.dataset.loadedUrl;
   descriptionContainer.removeAttribute("aria-busy");
   modal.classList.remove("is-description-expanded");
+  descriptionPanel.hidden = true;
+  specificationsPanel.hidden = true;
+  descriptionButton.classList.remove("is-active");
+  specificationsButton.classList.remove("is-active");
+  descriptionButton.setAttribute("aria-selected", "false");
+  specificationsButton.setAttribute("aria-selected", "false");
   currentModel = null;
 }
 
