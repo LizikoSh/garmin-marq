@@ -1,4 +1,6 @@
 import { inject } from '@vercel/analytics';
+
+// Запуск аналітики
 inject();
 
 const models = [
