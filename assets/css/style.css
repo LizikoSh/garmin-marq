@@ -235,8 +235,9 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 .model-modal ul { margin: 30px 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
 .model-modal li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,.16); font-size: 13px; }
 
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .85s ease, transform .85s ease; }
-.reveal.is-visible { opacity: 1; transform: none; }
+.reveal { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .85s ease, transform .85s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
 
 @keyframes heroDrift { from { transform: scale(1.13); } to { transform: scale(1.04); } }
 @keyframes scroll { 0% { opacity: 0; transform: translate(-50%,0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,18px); } }
@@ -265,7 +266,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 
   .hero { min-height: 820px; }
   .hero__media {
-  background-image: url("../images/marq-collectiom-hero-mobile.webp");
+  background-image: url("../images/marq-collection-hero-mobile.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -360,9 +361,40 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .model-modal__media { min-height: 350px; }
   .model-modal__media img { max-height: 330px; }
   .model-modal__content { padding: 40px 25px; }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .js .reveal { opacity: 1; transform: none; }
+}
+
+@media (min-width: 761px) {
+  .compare.section {
+    padding-bottom: 0;
+  }
+
+  .manifesto .fact-strip {
+    margin-top: 36px;
+    border-top: 0;
+  }
+
+  .manifesto .fact-strip > div {
+    min-height: 115px;
+    padding: 18px 20px;
+    border-right: 0;
+  }
+
+  .manifesto .fact-strip--bottom-line::after {
+    content: none;
+    display: none;
+  }
+
+  .manifesto.section {
+    padding-bottom: 48px;
+  }
 }
