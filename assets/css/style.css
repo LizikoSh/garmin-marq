@@ -361,6 +361,11 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .model-modal__media { min-height: 350px; }
   .model-modal__media img { max-height: 330px; }
   .model-modal__content { padding: 40px 25px; }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
