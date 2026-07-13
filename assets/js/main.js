@@ -1,5 +1,3 @@
-document.documentElement.classList.add("js");
-
 const models = [
   {
     name: "MARQ Athlete",
@@ -104,6 +102,12 @@ const models = [
 
 const grid = document.querySelector("[data-model-grid]");
 const modal = document.querySelector("[data-modal]");
+
+if (!grid || !modal) {
+  console.error("MARQ: не знайдено [data-model-grid] або [data-modal].");
+  throw new Error("Неповна структура index.html");
+}
+
 const modalImage = modal.querySelector("[data-modal-image]");
 const modalMedia = modal.querySelector(".model-modal__media");
 const specificationsPanel = modal.querySelector("[data-modal-specifications]");
@@ -111,6 +115,31 @@ const descriptionPanel = modal.querySelector("#model-description-panel");
 const descriptionContainer = modal.querySelector("[data-modal-description]");
 const descriptionButton = modal.querySelector('[data-modal-tab="description"]');
 const specificationsButton = modal.querySelector('[data-modal-tab="specifications"]');
+const modalCloseButton = modal.querySelector("[data-modal-close]");
+
+const requiredModalElements = {
+  modalImage,
+  modalMedia,
+  specificationsPanel,
+  descriptionPanel,
+  descriptionContainer,
+  descriptionButton,
+  specificationsButton,
+  modalCloseButton
+};
+
+const missingModalElements = Object.entries(requiredModalElements)
+  .filter(([, element]) => !element)
+  .map(([name]) => name);
+
+if (missingModalElements.length) {
+  console.error(
+    "MARQ: у модальному вікні відсутні елементи:",
+    missingModalElements.join(", ")
+  );
+  throw new Error("Структура модального вікна не відповідає main.js");
+}
+
 const descriptionCache = new Map();
 let currentModel = null;
 
@@ -224,9 +253,7 @@ function openModal(index) {
   modal.querySelector("[data-modal-material]").textContent = model.edition;
   modal.querySelector("[data-modal-title]").textContent = model.name;
   modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
-  modal.querySelector("[data-modal-features]").innerHTML = model.features
-    .map(item => `<li>${item}</li>`)
-    .join("");
+  modal.querySelector("[data-modal-features]").textContent = "Інформація готується";
 
   descriptionContainer.innerHTML = "";
   delete descriptionContainer.dataset.loadedUrl;
@@ -269,7 +296,7 @@ function clearLoadedDescription() {
   currentModel = null;
 }
 
-modal.querySelector("[data-modal-close]").addEventListener("click", closeModal);
+modalCloseButton.addEventListener("click", closeModal);
 modal.addEventListener("click", event => {
   const rect = modal.getBoundingClientRect();
   const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
@@ -310,14 +337,24 @@ nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
   document.body.classList.remove("is-menu-open");
 }));
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  document.documentElement.classList.add("js");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -45px"
   });
-}, { threshold: 0.12, rootMargin: "0px 0px -45px" });
 
-document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
-
+  revealElements.forEach(element => observer.observe(element));
+} else {
+  revealElements.forEach(element => element.classList.add("is-visible"));
+}
