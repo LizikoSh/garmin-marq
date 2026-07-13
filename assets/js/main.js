@@ -11,6 +11,7 @@ const models = [
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     wide: false
   },
+  
   {
     name: "MARQ Adventurer",
     edition: "Gen 2 · Титан",
