@@ -4,7 +4,8 @@ const models = [
     edition: "Gen 2 · Титан",
     material: "titanium",
     badge: "Спорт",
-    tagline: "Преміальний спортивний годинник для тих, хто прагне краще розуміти свою форму, відновлення та тренувальну готовність. Титановий корпус Grade 5, яскравий AMOLED-дисплей і розширені показники продуктивності поєднують технологічність із вишуканою естетикою.",
+    tagline: "Створений для тих, хто перетворює тренування на результат.",
+    modalDescription: "Преміальний спортивний годинник для тих, хто прагне краще розуміти свою форму, відновлення та тренувальну готовність. Титановий корпус Grade 5, яскравий AMOLED-дисплей і розширені показники продуктивності поєднують технологічність із вишуканою естетикою.",
     image: "assets/images/marq-athlete-thumb.webp",
     features: ["Training Readiness", "PacePro™ та Real-Time Stamina", "Безель VO₂ max і recovery time", "Спортивний вентильований силіконовий ремінець"],
     descriptionUrl: "model-descriptions/marq-athlete.html",
@@ -16,6 +17,7 @@ const models = [
     material: "titanium",
     badge: "Активний відпочинок",
     tagline: "Класична естетика інструментального годинника для нових маршрутів.",
+    modalDescription: "Сучасний інструментальний годинник для подорожей, експедицій і активного відпочинку. Корпус із титану Grade 5, AMOLED-дисплей і гібридний ремінець зі шкіри та FKM створені для маршрутів, що виходять за межі звичного.",
     image: "assets/images/marq-adventurer-thumb.webp",
     features: ["TopoActive maps", "NextFork™", "Компасний безель 360°", "Гібридний ремінець зі шкіри та FKM"],
     descriptionUrl: "model-descriptions/marq-adventurer.html",
@@ -27,6 +29,7 @@ const models = [
     material: "titanium",
     badge: "Гольф",
     tagline: "Преміальна точність для гри, у якій важливий кожен метр.",
+    modalDescription: "Преміальний годинник для гравців, які цінують точність на кожному етапі раунду. Віртуальний кадді, детальні карти та понад 42 000 завантажених полів допомагають приймати обґрунтовані рішення безпосередньо на полі.",
     image: "assets/images/marq-golfer-thumb.webp",
     features: ["Понад 42 000 полів", "Virtual Caddie", "Green Contours", "Три датчики Approach CT10 у комплекті"],
     descriptionUrl: "model-descriptions/marq-golfer.html",
@@ -38,6 +41,7 @@ const models = [
     material: "titanium",
     badge: "Море",
     tagline: "Штурман, таймер і командний центр — безпосередньо на зап’ясті.",
+    modalDescription: "Розкішний морський годинник для тих, чиє життя пов’язане з яхтингом і відкритою водою. Спеціалізовані функції для регат, навігації та керування судном перетворюють його на повноцінний морський інструмент на зап’ясті.",
     image: "assets/images/marq-captain-thumb.webp",
     features: ["Regatta Timer", "Керування автопілотом", "Marine data streaming", "Смугастий французький жакардовий ремінець"],
     descriptionUrl: "model-descriptions/marq-captain.html",
@@ -49,6 +53,7 @@ const models = [
     material: "titanium",
     badge: "Авіація",
     tagline: "Авіаційні дані, глобальний час і високе годинникове ремесло.",
+    modalDescription: "Преміальний авіаційний годинник, створений для пілотів і шанувальників польотів. Авіаційна навігація, функція Direct-To, сенсорний AMOLED-дисплей і корпус із титану Grade 5 забезпечують доступ до важливих даних у небі та на землі.",
     image: "assets/images/marq-aviator-thumb.webp",
     features: ["Direct-To navigation", "NEXRAD, METAR і TAF", "24-годинний GMT-безель", "Титановий браслет swept-wing"],
     descriptionUrl: "model-descriptions/marq-aviator.html",
@@ -60,6 +65,7 @@ const models = [
     material: "carbon",
     badge: "Карбон",
     tagline: "Максимальна спортивна функціональність у найлегшому корпусі MARQ.",
+    modalDescription: "Полегшена карбонова інтерпретація спортивного MARQ для інтенсивних тренувань і щоденного відстеження продуктивності. Корпус із Fused Carbon Fiber™, AMOLED-дисплей і шкала VO₂ max на безелі підкреслюють його спортивне призначення.",
     image: "assets/images/marq-carbon-athlete.webp",
     features: ["130 шарів Fused Carbon Fiber™", "До 16 днів автономності", "Розширені метрики продуктивності", "Купольне сапфірове скло"],
     descriptionUrl: "model-descriptions/marq-athlete-carbon.html",
@@ -71,6 +77,7 @@ const models = [
     material: "carbon",
     badge: "Карбон",
     tagline: "Технології для гольфу в корпусі з виразною карбоновою архітектурою.",
+    modalDescription: "Преміальний годинник для гольфу в легкому корпусі з виразною текстурою Fused Carbon Fiber™. Розширені карти полів і спеціалізовані функції допомагають точніше оцінювати дистанцію та планувати кожен удар.",
     image: "assets/images/marq-carbon-golfer.webp",
     features: ["Fused Carbon Fiber™", "Virtual Caddie", "Enhanced PlaysLike Distance", "Перфорований гібридний FKM-ремінець"],
     descriptionUrl: "model-descriptions/marq-golfer-carbon.html",
@@ -82,6 +89,7 @@ const models = [
     material: "carbon",
     badge: "Тактичний",
     tagline: "Преміальний тактичний інструмент із непомітним профілем.",
+    modalDescription: "Тактичний годинник преміумкласу, створений для ситуацій, у яких важливі надійність, контроль і непомітність. Легкий корпус із Fused Carbon Fiber™, AMOLED-дисплей і тактичний нейлоновий ремінець формують стриманий, функціональний образ.",
     image: "assets/images/marq-carbon-commander.webp",
     features: ["Stealth Mode", "Kill Switch", "Dual-position format", "Жакардовий тактичний нейлоновий ремінець"],
     descriptionUrl: "model-descriptions/marq-commander-carbon.html",
@@ -93,6 +101,7 @@ const models = [
     material: "steel",
     badge: "Лімітоване виконання",
     tagline: "Кожен корпус має унікальний природний рисунок кованої сталі.",
+    modalDescription: "Ексклюзивне виконання MARQ Adventurer у корпусі з дамаської сталі ручної роботи, природний візерунок якої робить кожен годинник унікальним. Сенсорний дисплей і автономність до 16 днів поєднують традиційне ремесло із сучасними технологіями Garmin.",
     image: "assets/images/marq-adventurer-damascus.webp",
     features: ["Багатошарова дамаська сталь", "Унікальний візерунок кожного корпусу", "Компасний безель 360°", "Гібридний шкіряний FKM-ремінець"],
     descriptionUrl: "model-descriptions/marq-adventurer-damascus.html",
@@ -253,7 +262,8 @@ function openModal(index) {
 
   modal.querySelector("[data-modal-material]").textContent = model.edition;
   modal.querySelector("[data-modal-title]").textContent = model.name;
-  modal.querySelector("[data-modal-tagline]").textContent = model.tagline;
+  modal.querySelector("[data-modal-tagline]").textContent =
+    model.modalDescription || model.tagline;
   modal.querySelector("[data-modal-features]").textContent = "Інформація готується";
 
   descriptionContainer.innerHTML = "";
