@@ -101,7 +101,28 @@ button { color: inherit; }
   animation: heroDrift 16s ease-out both;
 }
 .hero__veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.5) 43%, rgba(0,0,0,.16) 75%), linear-gradient(0deg, rgba(0,0,0,.82), transparent 58%); }
-.hero__content { position: relative; z-index: 2; padding-bottom: clamp(80px, 10vh, 125px); }
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(80px, 10vh, 125px);
+}
+
+.hero__content::before {
+  content: "";
+  position: absolute;
+  inset: -28px auto -28px -32px;
+  width: min(760px, calc(100% + 64px));
+  z-index: -1;
+  border-radius: 24px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.48),
+    rgba(0, 0, 0, 0.22),
+    transparent
+  );
+  filter: blur(4px);
+  pointer-events: none;
+}
 .eyebrow { color: var(--accent); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; }
 .hero__title { max-width: 900px; margin: 12px 0 24px; font-family: var(--serif); font-size: clamp(82px, 14vw, 210px); font-weight: 500; letter-spacing: -.065em; line-height: .7; }
 .hero__title span { display: block; margin-left: clamp(38px, 9vw, 150px); color: var(--accent); font-style: italic; }
