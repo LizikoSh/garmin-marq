@@ -40,6 +40,10 @@ function initReveals(scope = document) {
 
 initReveals();
 
+window.setTimeout(() => {
+  document.querySelectorAll(".reveal:not(.is-visible)").forEach(showRevealElement);
+}, 1200);
+
 const models = [
   {
     name: "MARQ Athlete",
