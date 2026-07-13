@@ -1,4 +1,4 @@
-import './analytics.js';
+import '/src/analytics.js';
 
 const models = [
   {
