@@ -134,15 +134,7 @@ button { color: inherit; }
 .fact-strip strong, .fact-strip span { display: block; }
 .fact-strip strong { font-family: var(--serif); font-size: clamp(28px, 3vw, 46px); font-weight: 500; line-height: 1; }
 .fact-strip span { max-width: 220px; margin-top: 9px; color: #6b5d43; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
-.fact-strip--bottom-line::after {
-  content: "";
-  grid-column: 1 / -1;
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin-top: 30px;
-  background: rgba(128, 106, 62, 0.35);
-}
+
 .collection { padding-bottom: clamp(48px, 6vw, 95px); background: var(--bg); }
 .section-heading { display: grid; grid-template-columns: 1.7fr .8fr; gap: 70px; align-items: end; margin-bottom: 70px; }
 .section-heading__copy { margin: 0 0 6px; color: var(--muted); }
@@ -243,8 +235,9 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 .model-modal ul { margin: 30px 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
 .model-modal li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,.16); font-size: 13px; }
 
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .85s ease, transform .85s ease; }
-.reveal.is-visible { opacity: 1; transform: none; }
+.reveal { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .85s ease, transform .85s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
 
 @keyframes heroDrift { from { transform: scale(1.13); } to { transform: scale(1.04); } }
 @keyframes scroll { 0% { opacity: 0; transform: translate(-50%,0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,18px); } }
@@ -264,27 +257,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   .display-title { font-size: clamp(45px, 15vw, 72px); line-height: .91; }
   .site-header { height: 72px; padding-inline: 18px; }
   .menu-toggle { display: block; z-index: 102; }
-  .site-nav {
-  position: fixed;
-  inset: 0;
-  z-index: 101;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 24px;
-  padding: 90px 30px;
-
-  background: rgba(8, 8, 8, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  transform: translateX(100%);
-  transition:
-    transform .35s ease,
-    background .35s ease;
-}
+  .site-nav { position: fixed; inset: 0; z-index: 101; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; padding: 90px 30px; background: #080808; transform: translateX(100%); transition: transform .35s ease; }
   .site-nav.is-open { transform: none; }
   .site-nav a { font-family: var(--serif); font-size: 36px; letter-spacing: 0; text-transform: none; }
   .site-nav__cta { padding: 0; border: 0; color: var(--accent); }
@@ -391,118 +364,6 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ==================================================
-   ЗМІНИ ЛИШЕ ДЛЯ ПК
-   ================================================== */
-
-@media (min-width: 761px) {
-
-  /* Фото займає всю праву половину картки без відступів */
-  .materials .material-panel__visual {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 50%;
-
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0;
-
-    display: block;
-    overflow: hidden;
-  }
-
-  /* Прибираємо світлий градієнт поверх фото */
-  .materials .material-panel__visual::after,
-  .materials .material-panel--damascus .material-panel__visual::after {
-    content: none;
-    display: none;
-  }
-
-  /* Фото заповнює всю праву половину */
-  .materials .material-panel__visual img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-
-    margin: 0;
-    padding: 0;
-
-    object-fit: cover;
-    object-position: right center;
-    filter: none;
-  }
-
-  /* Відступ тексту від лівого краю картки */
-  .materials .material-panel__content.container {
-    flex: 0 0 50%;
-    width: 50%;
-    max-width: none;
-    margin: 0;
-
-    padding-left: clamp(40px, 5vw, 80px);
-    padding-right: clamp(30px, 4vw, 60px);
-  }
-
-  /* Інше фонове фото в нижньому банері */
-  .contact__bg {
-    background-image: url("../images/9-find-the-model.webp");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  /* Прибрати великий проміжок після таблиці порівняння — лише ПК */
-@media (min-width: 761px) {
-  .compare.section {
-    padding-bottom: 0;
-  }
-}
-  /* Блок характеристик — лише ПК */
-@media (min-width: 761px) {
-
-  /* Зменшити проміжок між текстом і характеристиками */
-  .manifesto .fact-strip {
-    margin-top: 36px;
-
-    /* Прибрати верхню тонку лінію */
-    border-top: 0;
-  }
-
-  /* Прибрати вертикальні розділювачі */
-  .manifesto .fact-strip > div {
-    min-height: 115px;
-    padding: 18px 20px;
-    border-right: 0;
-  }
-
-  /* Прибрати додану нижню риску, якщо вона є */
-  .manifesto .fact-strip--bottom-line::after {
-    content: none;
-    display: none;
-  }
-
-  /* Зменшити порожнє місце після характеристик */
-  .manifesto.section {
-    padding-bottom: 48px;
-  }
-}
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal, .js .reveal { opacity: 1; transform: none; }
 }
