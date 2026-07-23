@@ -621,6 +621,11 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   line-height: 1.08;
 }
 
+.model-modal__expanded-description .gl-video-hero + .gl-intro > h2 {
+  font-size: clamp(16px, 2.1vw, 20px);
+  line-height: 1.2;
+}
+
 .model-modal__expanded-description .gl-intro-wrap {
   display: flex;
   gap: clamp(24px, 4vw, 54px);
