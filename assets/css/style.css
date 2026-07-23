@@ -778,6 +778,8 @@ tbody td { color: #b4b1a9; font-size: 13px; }
   padding: 26px 22px;
   border: 1px solid rgba(128,106,62,.18);
   background: var(--paper);
+  box-shadow: 0 10px 26px rgba(17, 17, 15, .08);
+
 }
 
 .model-modal__expanded-description .gl-feature-copy h2:last-child {
