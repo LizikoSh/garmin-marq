@@ -777,7 +777,7 @@ tbody td { color: #b4b1a9; font-size: 13px; }
 .model-modal__expanded-description .gl-feature {
   padding: 26px 22px;
   border: 1px solid rgba(128,106,62,.18);
-  background: rgba(248,245,237,.55);
+  background: var(--paper);
 }
 
 .model-modal__expanded-description .gl-feature-copy h2:last-child {
